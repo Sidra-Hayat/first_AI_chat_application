@@ -61,8 +61,6 @@ exports.chat = async (req, res) => {
         }
       ]
     });*/// for non streaming
-
-    
 //for streaming 
     const response = await client.chat.completions.create({
   model: "gpt-oss-120b",
