@@ -104,6 +104,7 @@ color:var(--muted);
 display:flex;
 gap:12px;
 max-width:75%;
+min-width:0;
 animation:
 slide .3s ease;
 }
@@ -160,6 +161,9 @@ padding:16px 20px;
 border-radius:20px;
 font-size:15px;
 line-height:1.6;
+min-width:0;
+max-width:100%;
+overflow-wrap:break-word;
 box-shadow:
 0 8px 25px
 rgba(0,0,0,.06);
@@ -320,7 +324,7 @@ display:none;
 }
 }
 .bubble p{
-  margin:8px 0;
+  margin:6px 0;
 }
 
 .bubble h1,
@@ -342,10 +346,22 @@ font-weight:700;
 }
 
 .bubble code{
+font-family:"JetBrains Mono",monospace;
+}
+
+.bubble p code,
+.bubble li code,
+.bubble td code{
 background:#f1f5f9;
 padding:3px 6px;
 border-radius:5px;
-font-family:"JetBrains Mono",monospace;
+color:#111827;
+}
+
+.bubble pre code{
+background:transparent;
+padding:0;
+color:inherit;
 }
 
 .bubble pre{
@@ -356,10 +372,12 @@ border-radius:12px;
 overflow-x:auto;
 }
 .bubble table{
-
 border-collapse:collapse;
 width:100%;
 margin:15px 0;
+display:block;
+overflow-x:auto;
+max-width:100%;
 }
 .bubble td,
 .bubble th{
@@ -380,4 +398,19 @@ padding:8px;
 
 .input-bar textarea::-webkit-scrollbar-track {
   background: transparent;
+}
+.copy-btn {
+  margin-top: 8px;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.copy-btn:hover {
+  background: #F1EFFF;
+  border-color: #7F77DD;
 }

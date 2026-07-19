@@ -96,10 +96,10 @@ function App() {
           </div>
         )}
 
-        {messages.map((msg, i) => (
-          <div key={i} className={`bubble-row ${msg.role}`}>
-            {msg.role === "ai" && <span className="tab" />}
-            <div className="bubble">
+       {messages.map((msg, i) => (
+  <div key={i} className={`bubble-row ${msg.role}`}>
+    {msg.role === "ai" && <span className="tab" />}
+    <div className="bubble">
 
 {
 msg.role === "ai" ? (
@@ -118,9 +118,19 @@ msg.content
 
 {msg.streaming && <span className="cursor" />}
 
+{msg.role === "ai" && !msg.streaming && (
+  <button
+    className="copy-btn"
+    onClick={() => navigator.clipboard.writeText(msg.content)}
+  >
+    Copy
+  </button>
+)}
+
 </div>
-          </div>
-        ))}
+  </div>
+))}
+       
 
         {loading && (
           <div className="bubble-row ai">
