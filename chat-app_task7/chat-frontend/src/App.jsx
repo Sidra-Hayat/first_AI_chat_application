@@ -17,7 +17,7 @@ function App() {
 
   const autoResize = (el) => {
     el.style.height = "auto";
-    el.style.height = Math.min(el.scrollHeight, 160) + "px";
+    el.style.height = Math.min(el.scrollHeight, 80) + "px";
   };
 
   const sendMessage = async () => {
