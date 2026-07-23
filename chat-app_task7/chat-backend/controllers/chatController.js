@@ -1,4 +1,5 @@
 const client = require("../config/aiClient");
+const Message = require("../models/Message");
 
 exports.chat = async (req, res) => {
   try {
@@ -91,16 +92,38 @@ res.setHeader("Connection", "keep-alive");   // work for streaming
     // and send it immediately for streaming
     // ==========================
 
-    for await (const chunk of response) {
+   let aiReply = "";
 
-      //  Extract text safely
-      const content = chunk.choices?.[0]?.delta?.content || "";
+for await (const chunk of response) {
 
-      // Send current chunk
-      if (content) {
-        res.write(content);
-      }
-    }
+  // Extract text safely
+  const content = chunk.choices?.[0]?.delta?.content || "";
+
+
+  if (content) {
+
+    // Store complete response
+    aiReply += content;
+
+
+    // Send chunk to frontend
+    res.write(content);
+  }
+}
+
+
+// Save conversation in MongoDB
+await Message.create({
+
+  userMessage: message,
+
+  aiResponse: aiReply
+
+});
+
+
+// End streaming response
+res.end();
     // ==========================
     // Return AI Response
     // ==========================

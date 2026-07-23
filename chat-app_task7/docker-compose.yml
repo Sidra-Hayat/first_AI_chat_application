@@ -1,0 +1,38 @@
+
+
+
+services:
+
+  backend:
+    build: ./chat-backend
+    container_name: chatapp-backend
+    ports:
+      - "5000:5000"
+    env_file:
+      - ./chat-backend/.env
+    restart: unless-stopped
+    depends_on:
+      - mongo
+
+
+  frontend:
+    build: ./chat-frontend
+    container_name: chatapp-frontend
+    ports:
+      - "3000:80"
+    restart: unless-stopped
+    depends_on:
+      - backend
+
+
+  mongo:
+    image: mongo:7
+    container_name: chatapp-mongo
+    restart: unless-stopped
+    volumes:
+      - mongo-data:/data/db
+
+
+volumes:
+
+  mongo-data:
